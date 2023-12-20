@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import { useStore } from '@/app/global.store';
 
 function LoginForm() {
   const [error, setError] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Nuevo estado isLoggedIn
   const router = useRouter();
+  const {setUser, setToken} = useStore()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,12 +18,21 @@ function LoginForm() {
       const email = event.target.email.value;
       const password = event.target.password.value;
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_ECOMMERCE}/users/login`, {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_ECOMMERCE}/users/login`, {
         email,
         password,
       });
+      console.log(data)
 
+      window.localStorage.setItem('user_nose',JSON.stringify(data.USER_FRONTED
+.user))
+      window.localStorage.setItem('token_nose',data.USER_FRONTED
+.token)
+
+      setUser(data.USER_FRONTED.user)
+      setToken(data.USER_FRONTED.token)
       router.push('/principal');
+
       Swal.fire({
         icon: 'success',
         title: 'Ingreso Exitoso',

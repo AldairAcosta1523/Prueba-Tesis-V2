@@ -1,9 +1,24 @@
+'use client'
+
 import Section3 from '@/components/components-contacto/Section3';
 import ContactContent from '@/components/components-contacto/ContactoContent';
-
+import { useStore } from "../global.store";
+import { useRouter } from 'next/navigation';
 import Box from '@/components/components-encabezado-pagina/Dash';
 import React from 'react';
+import { useEffect } from "react";
+
+
+
 export default function Contactanos() {
+  const {isLogin} = useStore()
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!isLogin) {
+      router.push('/');
+    }
+  }, [isLogin])
   return (
     <div>
     <div>

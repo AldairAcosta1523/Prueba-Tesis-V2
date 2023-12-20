@@ -1,9 +1,23 @@
+'use client'
+
 import Terminos from '@/components/components-tyc/ContentTyC';
 import Box from '@/components/components-encabezado-pagina/Dash';
 import React from 'react';
+import { useStore } from "../global.store";
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
 
 export default function TerminosYCondicionesPage() {
+  const {isLogin} = useStore()
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!isLogin) {
+      router.push('/');
+    }
+  }, [isLogin])
   return (
+    
     <div>
       <Box
         name="Terminos y Condiciones"

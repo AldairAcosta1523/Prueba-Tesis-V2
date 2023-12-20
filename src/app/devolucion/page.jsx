@@ -1,12 +1,25 @@
+'use client'
+
 import Section1Dev from '@/components/components-devolucion/Section1Dev';
 import Section2Dev from '@/components/components-devolucion/Section2Dev';
 import Section3Dev from '@/components/components-devolucion/Section3Dev';
 import Section4Dev from '@/components/components-devolucion/Section4Dev';
 import Section5Dev from '@/components/components-devolucion/Section5Dev';
+import { useStore } from "../global.store";
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
 
 import Box from '@/components/components-encabezado-pagina/Dash';
 import React from 'react';
 export default function Devoluciones() {
+  const {isLogin} = useStore()
+  const router = useRouter();
+
+  useEffect(() => {
+    if(!isLogin) {
+      router.push('/');
+    }
+  }, [isLogin])
   return (
     <div>
     <div>

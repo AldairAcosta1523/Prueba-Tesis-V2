@@ -26,7 +26,7 @@ function Cards() {
   const apiUrl = `${process.env.NEXT_PUBLIC_API_ECOMMERCE}/products/show/`;
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcwMzZhNTJkMjlhMDU4MWY5NmQxZGMiLCJyb2wiOiJhZG1pbiIsImVtYWlsIjoiYWxkYWlyQGdtYWlsLmNvbSIsImlhdCI6MTcwMjc0MjUyMCwiZXhwIjoxNzAyODI4OTIwfQ.xXqtJ2d3E3ZR_9N1sxN85INhcq_4DDcMhJZZfJczxxk'; 
 
-  const fetchData = async () => {
+  const fetchData2 = async () => {
     try {
       const response = await axios.get(apiUrl, {
         headers: {
@@ -39,6 +39,13 @@ function Cards() {
       console.error(error);
     }
   };
+
+  const fetchData = async  ()  => {
+
+    let { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_ECOMMERCE}/home/list`);
+
+    setProducts(data.our_products)
+  }
 
   
   return (
@@ -60,7 +67,7 @@ function Cards() {
                 {product.title}
               </Typography>
               <Typography color="blue-gray" className="font-medium"> 
-                {product.slug}
+              S/ {product.price_soles}
               </Typography>
             </div>
 

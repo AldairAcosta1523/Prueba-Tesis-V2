@@ -27,5 +27,6 @@ module.exports = withMT({
     require('flowbite/plugin'),
     require('@tailwindcss/forms'),
     require('tailwindcss-animated'),
+    require('daisyui'),
   ],
 });
